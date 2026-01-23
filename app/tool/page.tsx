@@ -1,17 +1,137 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { Inputs, Mode } from "../../lib/calc";
-import { computeCore, computePro } from "../../lib/calc";
+import { computeCore, computePro, Inputs, Mode } from "@/lib/calc";
 
 function money(n: number) {
   const v = Number.isFinite(n) ? n : 0;
   return `$${v.toFixed(2)}`;
 }
 
-export default function ToolPage() {
-  const GUMROAD_URL = "https://breakevencpa.gumroad.com/l/cdpmi";
+function pct01(x: number, digits = 0) {
+  const v = Number.isFinite(x) ? x : 0;
+  return `${(v * 100).toFixed(digits)}%`;
+}
 
+function clamp01(x: number) {
+  if (!Number.isFinite(x)) return 0;
+  return Math.max(0, Math.min(1, x));
+}
+
+function generateDemoBrief(inputs: Inputs, core: ReturnType<typeof computeCore>) {
+  const lines: string[] = [];
+  lines.push("AD PROFITABILITY SNAPSHOT");
+  lines.push(`Funnel type: ${inputs.mode === "leadgen" ? "Lead Gen" : "Ecommerce"}`);
+  lines.push("");
+
+  if (inputs.mode === "leadgen") {
+    lines.push(`Close rate: ${pct01(inputs.closeRate, 0)}`);
+    lines.push(`Revenue per close: $${Math.round(inputs.revenuePerClose)}`);
+  } else {
+    lines.push(`AOV: $${Math.round(inputs.aov)}`);
+    lines.push(`Conversion rate: ${pct01(inputs.conversionRate, 1)} (reference)`);
+  }
+
+  lines.push(`Gross margin: ${pct01(inputs.grossMargin, 0)}`);
+  lines.push(`Safety buffer: ${pct01(inputs.safetyBuffer, 0)}`);
+  lines.push(`Monthly budget modeled: $${Math.round(inputs.monthlyBudget)}`);
+  lines.push("");
+
+  lines.push(`Breakeven CPA: ${money(core.breakevenCPA)}`);
+  lines.push(`Target CPA (safe): ${money(core.targetCPA)}`);
+  if (core.maxCPL !== null) lines.push(`Max CPL: ${money(core.maxCPL)}`);
+
+  lines.push("");
+  lines.push("Next step:");
+  lines.push("Use the Target CPA as your guardrail when judging campaign performance.");
+
+  return lines.join("\n");
+}
+
+function generateProBrief(
+  inputs: Inputs,
+  core: ReturnType<typeof computeCore>,
+  pro: ReturnType<typeof computePro>
+) {
+  const lines: string[] = [];
+
+  lines.push("PAID ADS PROFITABILITY REPORT");
+  lines.push(`Funnel type: ${inputs.mode === "leadgen" ? "Lead Gen" : "Ecommerce"}`);
+  lines.push(`Monthly budget modeled: $${Math.round(inputs.monthlyBudget)}`);
+  lines.push("");
+
+  // Unit economics framing
+  lines.push("UNIT ECONOMICS");
+  if (inputs.mode === "leadgen") {
+    lines.push(`• Close rate: ${pct01(inputs.closeRate, 0)}`);
+    lines.push(`• Revenue per close: $${Math.round(inputs.revenuePerClose)}`);
+  } else {
+    lines.push(`• AOV: $${Math.round(inputs.aov)}`);
+    lines.push(`• Conversion rate: ${pct01(inputs.conversionRate, 1)} (reference)`);
+  }
+  lines.push(`• Gross margin: ${pct01(inputs.grossMargin, 0)}`);
+  lines.push(`• Profit per conversion (before ads): ${money(core.profitPerConversion)}`);
+  lines.push("");
+
+  // Targets
+  lines.push("EFFICIENCY TARGETS");
+  lines.push(`• Breakeven CPA: ${money(core.breakevenCPA)}`);
+  lines.push(`• Recommended Target CPA (safe): ${money(core.targetCPA)}`);
+  if (core.maxCPL !== null) lines.push(`• Max CPL (based on close rate): ${money(core.maxCPL)}`);
+  lines.push("");
+
+  // Risk: find first losing scenario and "breaks at"
+  const sorted = [...pro.scenarios].sort((a, b) => a.assumedCPA - b.assumedCPA);
+  const firstLosing = sorted.find((s) => s.profitAtBudget < 0);
+  const breaksAt = firstLosing ? firstLosing.assumedCPA : null;
+
+  lines.push("RISK ASSESSMENT (CPA DRIFT)");
+  for (const s of sorted) {
+    const status =
+      s.profitAtBudget > 0 ? "SAFE" : s.profitAtBudget === 0 ? "TIGHT" : "LOSING";
+    lines.push(`• ${s.label}: CPA ${money(s.assumedCPA)} → Profit $${s.profitAtBudget.toFixed(0)} (${status})`);
+  }
+  if (breaksAt !== null) {
+    lines.push(`• Break-even zone flips negative above ~${money(breaksAt)} (at this budget & assumptions).`);
+  } else {
+    lines.push("• No break detected in this stress range (still monitor CPA closely).");
+  }
+  lines.push("");
+
+  // Scaling summary
+  lines.push("SCALING OUTLOOK");
+  for (const r of pro.scalingTable) {
+    lines.push(
+      `• Budget $${r.budget}: Profit $${r.profit.toFixed(0)} | Conversions ${r.conversions.toFixed(1)} | Risk ${r.risk}`
+    );
+  }
+  lines.push("");
+
+  // Verdict
+  const buf = clamp01(inputs.safetyBuffer);
+  const verdict =
+    breaksAt !== null && core.targetCPA > breaksAt
+      ? "NO-GO"
+      : "GO (with guardrails)";
+
+  lines.push("VERDICT");
+  lines.push(
+    verdict === "NO-GO"
+      ? `NO-GO: Your safe target CPA (${money(core.targetCPA)}) is above the break threshold (~${money(
+          breaksAt!
+        )}). Improve economics or lower CPA before scaling.`
+      : `GO (with guardrails): Keep CPA ≤ ${money(core.targetCPA)} (includes ~${Math.round(
+          buf * 100
+        )}% buffer). Scale only if CPA stays stable.`
+  );
+
+  lines.push("");
+  lines.push(`Generated: ${new Date().toLocaleString()}`);
+
+  return lines.join("\n");
+}
+
+export default function ToolPage() {
   // Inputs (defaults)
   const [mode, setMode] = useState<Mode>("leadgen");
   const [monthlyBudget, setMonthlyBudget] = useState<number>(800);
@@ -20,8 +140,8 @@ export default function ToolPage() {
   const [closeRate, setCloseRate] = useState<number>(0.2);
   const [revenuePerClose, setRevenuePerClose] = useState<number>(600);
 
-  // Ecommerce (reference only)
-  const [conversionRate, setConversionRate] = useState<number>(0.02);
+  // Ecommerce
+  const [conversionRate, setConversionRate] = useState<number>(0.02); // optional reference
   const [aov, setAov] = useState<number>(85);
 
   // Shared
@@ -86,51 +206,49 @@ export default function ToolPage() {
   const pro = useMemo(() => (isPro ? computePro(inputs) : null), [inputs, isPro]);
 
   const decisionBrief = useMemo(() => {
-    const lines: string[] = [];
-    lines.push("DECISION BRIEF");
-    lines.push(`Mode: ${mode === "leadgen" ? "Lead Gen" : "Ecommerce"}`);
-    lines.push("");
-
-    if (mode === "leadgen") {
-      lines.push(`Close rate: ${(closeRate * 100).toFixed(0)}%`);
-      lines.push(`Revenue per close: $${revenuePerClose}`);
-    } else {
-      lines.push(`AOV: $${aov}`);
-      lines.push(`Conversion rate: ${(conversionRate * 100).toFixed(1)}% (reference)`);
-    }
-
-    lines.push(`Gross margin: ${(grossMargin * 100).toFixed(0)}%`);
-    lines.push(`Safety buffer: ${(safetyBuffer * 100).toFixed(0)}%`);
-    lines.push(`Monthly budget: $${monthlyBudget}`);
-    lines.push("");
-
-    lines.push(`Breakeven CPA: ${money(core.breakevenCPA)}`);
-    lines.push(`Target CPA (safe): ${money(core.targetCPA)}`);
-    if (core.maxCPL !== null) lines.push(`Max CPL: ${money(core.maxCPL)}`);
-
-    lines.push("");
-    lines.push("Risk note:");
-    lines.push("This snapshot assumes performance holds.");
-    lines.push("Pro shows where it breaks (CPA drift + scaling plan).");
-
-    return lines.join("\n");
-  }, [
-    mode,
-    closeRate,
-    revenuePerClose,
-    aov,
-    conversionRate,
-    grossMargin,
-    safetyBuffer,
-    monthlyBudget,
-    core.breakevenCPA,
-    core.targetCPA,
-    core.maxCPL,
-  ]);
+    if (!isPro || !pro) return generateDemoBrief(inputs, core);
+    return generateProBrief(inputs, core, pro);
+  }, [isPro, pro, inputs, core]);
 
   async function copyBrief() {
     await navigator.clipboard.writeText(decisionBrief);
     alert("Copied ✅");
+  }
+
+  async function downloadPdf() {
+    if (!isPro) {
+      alert("PDF export is a Pro feature 🔒");
+      return;
+    }
+
+    // Dynamic import keeps bundle light
+    const { jsPDF } = await import("jspdf");
+
+    const doc = new jsPDF({
+      unit: "pt",
+      format: "letter",
+    });
+
+    const margin = 48;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const usableWidth = pageWidth - margin * 2;
+
+    doc.setFont("times", "normal");
+    doc.setFontSize(12);
+
+    const lines = doc.splitTextToSize(decisionBrief, usableWidth);
+    let y = margin;
+
+    for (const line of lines) {
+      if (y > doc.internal.pageSize.getHeight() - margin) {
+        doc.addPage();
+        y = margin;
+      }
+      doc.text(line, margin, y);
+      y += 16;
+    }
+
+    doc.save("paid-ads-profitability-report.pdf");
   }
 
   async function verifyLicense() {
@@ -173,14 +291,6 @@ export default function ToolPage() {
     localStorage.removeItem("pro_unlocked");
   }
 
-  function clearAll() {
-    setLicenseKey("");
-    setVerifyMsg("");
-    setIsPro(false);
-    localStorage.removeItem("pro_unlocked");
-    localStorage.removeItem("gumroad_license_key");
-  }
-
   return (
     <main className="min-h-screen bg-white text-zinc-900">
       <div className="mx-auto max-w-6xl px-6 py-12">
@@ -188,7 +298,7 @@ export default function ToolPage() {
           <div>
             <h1 className="text-3xl font-bold">Breakeven CPA Calculator</h1>
             <p className="text-zinc-600">
-              Demo gives the snapshot. Pro unlocks risk + scaling so you don’t get surprised later.
+              Get CPA guardrails + a real report you can save (copy or PDF).
             </p>
           </div>
 
@@ -202,13 +312,23 @@ export default function ToolPage() {
               </a>
 
               <button
-                onClick={() => {
-                  if (!isPro) alert("Pro feature 🔒 — unlock with your Gumroad license key.");
-                  else copyBrief();
-                }}
+                onClick={copyBrief}
                 className="rounded-xl bg-zinc-900 px-4 py-2 text-white font-semibold hover:bg-zinc-800"
               >
-                Copy Decision Brief {isPro ? "" : "🔒"}
+                Copy Brief ✅
+              </button>
+
+              <button
+                onClick={downloadPdf}
+                className={`rounded-xl border px-4 py-2 font-semibold ${
+                  isPro
+                    ? "border-zinc-300 hover:bg-zinc-50"
+                    : "border-zinc-200 text-zinc-400 cursor-not-allowed"
+                }`}
+                disabled={!isPro}
+                title={isPro ? "Download PDF" : "Unlock Pro to export PDF"}
+              >
+                Download PDF {isPro ? "" : "🔒"}
               </button>
             </div>
 
@@ -338,7 +458,7 @@ export default function ToolPage() {
                   </label>
 
                   <label className="grid gap-1">
-                    <span className="text-sm font-semibold">Conversion Rate (0–1) (optional)</span>
+                    <span className="text-sm font-semibold">Conversion Rate (0–1) (reference)</span>
                     <input
                       type="number"
                       step="0.001"
@@ -355,7 +475,7 @@ export default function ToolPage() {
             <div className="mt-8 rounded-2xl border border-zinc-200 p-4">
               <p className="font-semibold">Unlock Pro (Gumroad License Key)</p>
               <p className="text-sm text-zinc-600 mt-1">
-                After purchase, paste your license key to unlock Risk + Scaling + Decision Brief.
+                Paste your license key to unlock Risk + Scaling + Report export (PDF).
               </p>
 
               <div className="mt-3 flex flex-col gap-2 sm:flex-row">
@@ -375,35 +495,12 @@ export default function ToolPage() {
               </div>
 
               {verifyMsg && <p className="mt-2 text-sm text-zinc-700">{verifyMsg}</p>}
-
-              {/* New CTA + Clear */}
-              <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-                <a
-                  href={GUMROAD_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full rounded-xl border border-zinc-300 px-4 py-2 text-center font-semibold hover:bg-zinc-50"
-                >
-                  Buy Pro (CAD $19)
-                </a>
-
-                <button
-                  onClick={clearAll}
-                  className="w-full rounded-xl border border-zinc-300 px-4 py-2 font-semibold hover:bg-zinc-50"
-                >
-                  Clear
-                </button>
-              </div>
-
-              <p className="mt-2 text-xs text-zinc-500">
-                After purchase, Gumroad gives you a license key on the receipt. Paste it here to unlock.
-              </p>
             </div>
           </section>
 
           {/* Results */}
           <section className="rounded-2xl border border-zinc-200 p-6">
-            <h2 className="text-lg font-bold">Snapshot (Demo)</h2>
+            <h2 className="text-lg font-bold">Snapshot</h2>
 
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-zinc-200 p-4">
@@ -424,68 +521,34 @@ export default function ToolPage() {
               )}
             </div>
 
-            <p className="mt-4 text-sm text-zinc-600">
-              This snapshot assumes performance holds.{" "}
-              <span className="font-semibold">Pro shows where it breaks.</span>
-            </p>
-
-            {/* Locked/Unlocked Pro sections */}
+            {/* Pro sections */}
             <div className="mt-8 grid gap-4">
               {!isPro ? (
                 <>
                   <div className="rounded-2xl border border-zinc-200 p-4">
-                    <p className="font-semibold">🔒 Risk Check (Pro)</p>
+                    <p className="font-semibold">🔒 Risk Check</p>
                     <p className="text-sm text-zinc-600 mt-1">
-                      See what happens if CPA drifts +10–30% (and where profitability breaks).
+                      Stress test profit if CPA drifts +10–30%.
                     </p>
                   </div>
                   <div className="rounded-2xl border border-zinc-200 p-4">
-                    <p className="font-semibold">🔒 Scaling Plan (Pro)</p>
+                    <p className="font-semibold">🔒 Scaling Plan</p>
                     <p className="text-sm text-zinc-600 mt-1">
                       Budget table (0.5×, 1×, 2×, 3×) with profit + risk flags.
                     </p>
                   </div>
                   <div className="rounded-2xl border border-zinc-200 p-4">
-                    <p className="font-semibold">🔒 Decision Brief Export (Pro)</p>
+                    <p className="font-semibold">🔒 Report Export</p>
                     <p className="text-sm text-zinc-600 mt-1">
-                      Copy a clean, client-ready brief with targets + risk notes.
+                      Copy a clean report + download a PDF.
                     </p>
                   </div>
                 </>
               ) : (
                 <>
-                  {/* Risk analysis */}
+                  {/* Risk */}
                   <div className="rounded-2xl border border-zinc-200 p-4">
-                    <p className="font-semibold">Risk Check: How fragile is this?</p>
-                    <p className="text-sm text-zinc-600 mt-1">
-                      If CPA rises, profit can flip. Here’s the stress test.
-                    </p>
-
-                    {/* NEW: Risk Verdict line */}
-                    <div className="mt-3 rounded-xl border border-zinc-200 bg-white p-3 text-sm">
-                      {(() => {
-                        const losing = pro!.scenarios.find((s) => s.status === "LOSING");
-                        if (losing) {
-                          return (
-                            <span>
-                              <span className="font-semibold">Risk verdict:</span>{" "}
-                              Your model turns unprofitable at{" "}
-                              <span className="font-semibold">{money(losing.assumedCPA)}</span>{" "}
-                              (scenario: {losing.label}). Keep CPA below{" "}
-                              <span className="font-semibold">{money(core.targetCPA)}</span>.
-                            </span>
-                          );
-                        }
-                        return (
-                          <span>
-                            <span className="font-semibold">Risk verdict:</span>{" "}
-                            You stay profitable through the stress test. Your safe target is{" "}
-                            <span className="font-semibold">{money(core.targetCPA)}</span>.
-                          </span>
-                        );
-                      })()}
-                    </div>
-
+                    <p className="font-semibold">Risk Check (CPA drift)</p>
                     <div className="mt-3 overflow-x-auto">
                       <table className="w-full text-sm">
                         <thead className="text-zinc-600">
@@ -516,13 +579,9 @@ export default function ToolPage() {
                     </div>
                   </div>
 
-                  {/* Scaling plan */}
+                  {/* Scaling */}
                   <div className="rounded-2xl border border-zinc-200 p-4">
-                    <p className="font-semibold">Scaling Plan: What budget makes sense?</p>
-                    <p className="text-sm text-zinc-600 mt-1">
-                      Same assumptions, different budgets. Use this to plan month-to-month spend.
-                    </p>
-
+                    <p className="font-semibold">Scaling Plan</p>
                     <div className="mt-3 overflow-x-auto">
                       <table className="w-full text-sm">
                         <thead className="text-zinc-600">
@@ -540,11 +599,7 @@ export default function ToolPage() {
                               <td className="py-2 text-right">{r.conversions.toFixed(1)}</td>
                               <td className="py-2 text-right">{`$${r.profit.toFixed(0)}`}</td>
                               <td className="py-2 text-right font-semibold">
-                                {r.risk === "LOW"
-                                  ? "✅ Low"
-                                  : r.risk === "MED"
-                                  ? "⚠️ Med"
-                                  : "❗ High"}
+                                {r.risk === "LOW" ? "✅ Low" : r.risk === "MED" ? "⚠️ Med" : "❗ High"}
                               </td>
                             </tr>
                           ))}
@@ -553,18 +608,26 @@ export default function ToolPage() {
                     </div>
                   </div>
 
-                  {/* Decision brief */}
+                  {/* Report */}
                   <div className="rounded-2xl border border-zinc-200 p-4">
-                    <p className="font-semibold">Decision Brief (Copy/Paste)</p>
+                    <p className="font-semibold">Profitability Report (Copy/PDF)</p>
                     <pre className="mt-2 whitespace-pre-wrap rounded-xl border border-zinc-200 bg-white p-3 text-sm">
                       {decisionBrief}
                     </pre>
-                    <button
-                      onClick={copyBrief}
-                      className="mt-3 rounded-xl bg-zinc-900 px-4 py-2 text-white font-semibold hover:bg-zinc-800"
-                    >
-                      Copy Decision Brief ✅
-                    </button>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <button
+                        onClick={copyBrief}
+                        className="rounded-xl bg-zinc-900 px-4 py-2 text-white font-semibold hover:bg-zinc-800"
+                      >
+                        Copy Report ✅
+                      </button>
+                      <button
+                        onClick={downloadPdf}
+                        className="rounded-xl border border-zinc-300 px-4 py-2 font-semibold hover:bg-zinc-50"
+                      >
+                        Download PDF ✅
+                      </button>
+                    </div>
                   </div>
                 </>
               )}
