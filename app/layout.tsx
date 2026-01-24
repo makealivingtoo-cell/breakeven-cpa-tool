@@ -26,7 +26,7 @@ export default function RootLayout({
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1910924946182099');
+            fbq('init', '1561424758243333');
             fbq('track', 'PageView');
           `}
         </Script>
