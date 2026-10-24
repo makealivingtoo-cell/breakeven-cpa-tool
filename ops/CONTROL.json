@@ -10,5 +10,11 @@
   "active_experiment": "E001",
   "last_verified_revenue_cad": 0,
   "last_verified_spending_cad": 0,
-  "notes": "Switch operating_mode only after account-specific confirmations, compliant sender selection and verified deployment/payment readiness. Pause by setting status to paused, or disabling hourly automation."
+  "notes": "User selected existing swiftscape.org account for API access. Do not modify, create, delete, or charge anything in this Stripe account. Use connected API only for read-only operations; do not retrieve/export secrets. Render deployment and outbound Gmail remain gated; existing funding and shutdown limits unchanged.",
+  "approved_stripe_account_name": "swiftscape.org",
+  "approved_stripe_context": "acct_1QIAkSDIXuiuULNg",
+  "stripe_account_permission": "connected_api_read_only",
+  "allow_stripe_api_reads": true,
+  "allow_stripe_resource_creation": false,
+  "stripe_permission_recorded_on": "2026-10-24"
 }
