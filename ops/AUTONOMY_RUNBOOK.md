@@ -28,3 +28,6 @@ Scheduled hourly automation **Lead Recovery Operator** is active as of 2026-10-2
 
 ## Recovery
 If a run fails, record the error once, check the last successful action identifier, and retry only idempotent steps. Human can pause operations by changing CONTROL.json status to `paused`, or by disabling the hourly automation. To resume, confirm ledger/customer obligations and change status to `active`.
+
+## Stripe account authorization — 2026-10-24
+The owner explicitly selected the connected live Stripe account named `swiftscape.org` (context `acct_1QIAkSDIXuiuULNg`) for API usage, **without changing existing things**. Treat this as read-only API permission. Do not create products, payment links, checkouts, customers, refunds, subscriptions, payouts, or other changes in that account until an express, narrower authorization is given. No API keys or secrets are to be extracted, copied, or placed in source control. Use the OAuth-connected Stripe tool for eligible read operations only. Existing `allow_live_payments` remains false.
