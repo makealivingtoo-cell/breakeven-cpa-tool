@@ -36,3 +36,13 @@ C$0 new outlay; C$0 collected.
 
 ### Next action
 Run the first unattended cycle; verify its journal write. Continue independent research and asset refinement while specific sender, Stripe, and Render account selection remain unconfirmed.
+
+## 2026-10-24 — Stripe account permission confirmed
+### Action
+Verified via the connected Stripe account-list API that the accessible live account is `swiftscape.org` (context `acct_1QIAkSDIXuiuULNg`). User authorized use of this account for API access while explicitly preserving existing things. Updated `ops/CONTROL.json` for read-only API access and retained the no-live-payment-writes gate.
+
+### Result and constraints
+Account API connection verified; no existing Stripe resources edited and no Stripe mutations performed. No API secret accessed or exported. Product creation and live checkout remain disabled until separately authorized. Render and email permissions remain unset.
+
+### Cost and next action
+C$0 spent or committed; C$0 revenue collected. Continue unblocked research and landing-page refinement. Deploy and outreach only after specific resource/account permission is confirmed.
