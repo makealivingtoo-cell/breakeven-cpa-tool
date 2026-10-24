@@ -26,5 +26,14 @@
   "approved_sender_link_id": "link_6abea640378c8191a4539d979d7a71d9",
   "sender_permission_recorded_on": "2026-10-24",
   "allow_customer_inquiry_replies": true,
-  "outbound_hold_reason": "Gmail sender identified, but no verified sender physical mailing address and opt-out compliance workflow for unsolicited commercial outreach. Do not send new prospect pitches yet."
+  "outbound_hold_reason": "Gmail sender identified, but no verified sender physical mailing address and opt-out compliance workflow for unsolicited commercial outreach. Do not send new prospect pitches yet.",
+  "render_service_id": "srv-dbejq5ks728c73cfj1gg",
+  "render_service_name": "lead-recovery-snapshot",
+  "render_site_url": "https://lead-recovery-snapshot.onrender.com",
+  "render_deploy_id": "dep-dbejq5ks728c73cfj1sg",
+  "render_deploy_status": "live",
+  "render_last_verified_date": "2026-10-24",
+  "render_external_http_check": "not_verified_in_current_environment",
+  "render_free_tier_spend_risk": "Although static hosting is free, Render may bill shared workspace for outbound bandwidth or pipeline-minutes beyond included quota. Use manual deployments only, monitor limits, and keep new outlays at C$0.",
+  "render_scope_now": "Only change newly created lead-recovery-snapshot service if needed for security, bugfix, or compliance. Never modify other services or workspace settings."
 }
