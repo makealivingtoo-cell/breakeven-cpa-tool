@@ -46,3 +46,21 @@ Account API connection verified; no existing Stripe resources edited and no Stri
 
 ### Cost and next action
 C$0 spent or committed; C$0 revenue collected. Continue unblocked research and landing-page refinement. Deploy and outreach only after specific resource/account permission is confirmed.
+
+## 2026-10-24 — Render deployment and business Gmail selected
+### Authorized scope
+The owner authorized one new free Render deployment in existing `My Workspace` and selected `makealivingtoo@gmail.com` as the business sender. Gmail OAuth profile confirmed as `makealivingtoo@gmail.com`. Unsolicited sales messages remain disabled until lawful sender-identification/opt-out details are documented. Customer-initiated inquiries may be replied to by the selected business account.
+
+### Completed
+- Created self-contained static site `lead-recovery-site/index.html` on the business GitHub branch, with calculator and `mailto` inquiry.
+- Created new Render static-site service `lead-recovery-snapshot`, ID `srv-dbejq5ks728c73cfj1gg`, in workspace `tea-d709v18gjchc73d34qs0`.
+- Service uses build command `test -f lead-recovery-site/index.html` and publish path `lead-recovery-site`; dependency installation bypass and automatic deployment disabled to minimize shared pipeline usage.
+- Render deploy `dep-dbejq5ks728c73cfj1sg` returned status `live`; service URL is https://lead-recovery-snapshot.onrender.com.
+- No existing Render service was edited. External HTTP fetch could not verify due to network/DNS restrictions in the execution environment; Render deployment API is the verified evidence.
+
+### Financials and risks
+- New paid commitments: C$0; total verified revenue C$0.
+- Render documentation says free static sites share workspace bandwidth and pipeline-minute allowances, with potential overage billing if a payment method is present. There is no per-site hard bandwidth-spend cap exposed by the connected tools. Keep manual deployments, monitor utilization, and raise an alert if usage rises unexpectedly.
+
+### Next action
+Verify public visitor accessibility through an available browser; set up compliant cold outreach only after required legal identification/unsubscribe details are available. Validate qualified demand and prepare checkout flow while honoring read-only Stripe restriction.
