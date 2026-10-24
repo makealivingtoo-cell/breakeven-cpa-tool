@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 
-const PRICE_CAD = 99;
 const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "";
+const paymentLink = process.env.NEXT_PUBLIC_PAYMENT_LINK || "";
 
 export default function HomePage() {
   const [monthlyLeads, setMonthlyLeads] = useState(40);
@@ -22,6 +22,7 @@ export default function HomePage() {
   const emailHref = contactEmail
     ? `mailto:${contactEmail}?subject=${subject}&body=${body}`
     : "#request";
+  const purchaseHref = paymentLink || emailHref;
 
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-100">
@@ -43,8 +44,8 @@ export default function HomePage() {
               <a href="#calculator" className="rounded-xl bg-emerald-400 px-6 py-3 text-center font-bold text-zinc-950 hover:bg-emerald-300">
                 Run the free leak calculator
               </a>
-              <a href={emailHref} className="rounded-xl border border-zinc-700 px-6 py-3 text-center font-bold hover:bg-zinc-900">
-                Request the C$99 snapshot
+              <a href={purchaseHref} className="rounded-xl border border-zinc-700 px-6 py-3 text-center font-bold hover:bg-zinc-900">
+                {paymentLink ? "Buy the C$99 snapshot" : "Request the C$99 snapshot"}
               </a>
             </div>
             <p className="mt-3 text-sm text-zinc-500">No retainer. No ad spend. No access to customer data required.</p>
@@ -104,8 +105,8 @@ export default function HomePage() {
               <div className="text-sm text-zinc-500">Scenario value at risk / month</div>
               <div className="mt-1 text-4xl font-black text-emerald-300">C${Math.round(monthlyLeak).toLocaleString()}</div>
             </div>
-            <a href={emailHref} className="rounded-xl bg-white px-6 py-3 text-center font-bold text-zinc-950 hover:bg-zinc-200">
-              Get the C$99 diagnosis
+            <a href={purchaseHref} className="rounded-xl bg-white px-6 py-3 text-center font-bold text-zinc-950 hover:bg-zinc-200">
+              {paymentLink ? "Buy the C$99 diagnosis" : "Request the C$99 diagnosis"}
             </a>
           </div>
         </section>
@@ -142,8 +143,8 @@ export default function HomePage() {
           <p className="mt-3 max-w-2xl text-zinc-300">
             The first five paid snapshots are C$99 while the service is being standardized. Scope is fixed so delivery stays fast.
           </p>
-          <a href={emailHref} className="mt-6 inline-block rounded-xl bg-emerald-400 px-6 py-3 font-bold text-zinc-950 hover:bg-emerald-300">
-            Request a snapshot
+          <a href={purchaseHref} className="mt-6 inline-block rounded-xl bg-emerald-400 px-6 py-3 font-bold text-zinc-950 hover:bg-emerald-300">
+            {paymentLink ? "Buy the snapshot" : "Request a snapshot"}
           </a>
           {!contactEmail && (
             <p className="mt-3 text-sm text-amber-300">
