@@ -1,0 +1,4 @@
+date,type,description,status,amount_cad,fees_cad,net_cad,notes
+2026-10-24,funding,Owner funding ceiling,available,50.00,0.00,0.00,Hard ceiling; not revenue
+2026-10-24,expense,Infrastructure and tools,spent,0.00,0.00,0.00,Free resources only so far
+2026-10-24,revenue,Collected revenue,collected,0.00,0.00,0.00,No customer payments accepted yet
