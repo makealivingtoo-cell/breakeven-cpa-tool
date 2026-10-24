@@ -1,0 +1,1 @@
+order_id,created_at_utc,customer_business,customer_email,website,service_area,primary_service,inquiry_channel,source,scope_confirmed_at_utc,intake_complete_at_utc,payment_status,payment_reference,amount_collected_cad,delivery_due_at_utc,delivery_status,delivered_at_utc,refund_status,notes
