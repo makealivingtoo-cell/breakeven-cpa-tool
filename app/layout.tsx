@@ -1,36 +1,14 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Breakeven CPA Tool",
-  description: "Know your breakeven CPA before you burn ad spend.",
+  title: "Lead Recovery Snapshot | Home-Service Funnel Audit",
+  description: "A fixed-price 48-hour audit for home-service businesses: find conversion leaks, improve inquiry flow, strengthen quote follow-up, and fix local/AI visibility gaps.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        {/* Meta Pixel */}
-        <Script id="meta-pixel" strategy="afterInteractive">
-          {`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1561424758243333');
-            fbq('track', 'PageView');
-          `}
-        </Script>
-      </head>
       <body>{children}</body>
     </html>
   );
