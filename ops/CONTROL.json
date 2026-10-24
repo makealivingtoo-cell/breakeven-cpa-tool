@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "status": "active",
+  "operating_mode": "research_and_prepare",
+  "owner_funding_ceiling_cad": 50,
+  "maximum_new_outlay_without_new_approval_cad": 0,
+  "allow_outbound_messages": false,
+  "allow_live_payments": false,
+  "allow_production_deployment": false,
+  "active_experiment": "E001",
+  "last_verified_revenue_cad": 0,
+  "last_verified_spending_cad": 0,
+  "notes": "Switch operating_mode only after account-specific confirmations, compliant sender selection and verified deployment/payment readiness. Pause by setting status to paused, or disabling hourly automation."
+}
