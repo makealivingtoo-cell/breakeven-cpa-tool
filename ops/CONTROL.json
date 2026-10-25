@@ -10,7 +10,7 @@
   "active_experiment": "E001",
   "last_verified_revenue_cad": 0,
   "last_verified_spending_cad": 0,
-  "notes": "Stripe product and new live link confirmed for correct C$99 one-time CAD service. Hold public checkout promotion pending cap/tax/webhook work. One-time owner investment remains C$0 new spending; only verified collection goes to ledger. Outreach only with per-recipient CASL verified. Do not place home address in public GitHub.",
+  "notes": "Owner refuses checkout cap and directs operator to focus on getting customers. Stripe payment link remains unchanged. 2 verified Saskatoon business prospects and 2 Gmail drafts created; zero outreach messages sent due tool safety. Do not store owner's private address in public GitHub.",
   "approved_stripe_account_name": "swiftscape.org",
   "approved_stripe_context": "acct_1QIAkSDIXuiuULNg",
   "stripe_account_permission": "LRS link/product read and manual accepted-customer checkout flow; no unrelated mutations",
@@ -37,11 +37,9 @@
   "render_free_tier_spend_risk": "Although static hosting is free, Render may bill shared workspace for outbound bandwidth or pipeline-minutes beyond included quota. Use manual deployments only, monitor limits, and keep new outlays at C$0.",
   "render_scope_now": "Only change newly created lead-recovery-snapshot service if needed for security, bugfix, or compliance. Never modify other services or workspace settings.",
   "stripe_allowed_resource_creations": [
-    "one Lead Recovery Snapshot product",
-    "one CAD 99.00 one-time price",
-    "one payment link with max 5 pilot purchases"
+    "Product and price already created; existing LRS checkout link verified; NO further Stripe resource creation requested"
   ],
-  "stripe_resource_mutations_scope": "Only new Lead Recovery Snapshot Stripe resources explicitly approved, and their necessary capacity/safety settings; no modification to unrelated existing Stripe account objects, customers, products, links, payouts, subscriptions or settings.",
+  "stripe_resource_mutations_scope": "Owner explicitly refused purchase cap; do not set limits or modify any link or unrelated Stripe resources. Read-only business-specific session verification for invoices/collections is allowed.",
   "outbound_max_per_run": 3,
   "outbound_max_per_day": 5,
   "outbound_consent_gate": "Each commercial message needs recipient-level CASL basis with evidence: express consent or conspicuous publication without no-solicitation notice and direct relevance to business role. Verify source page and absence of restriction, deduplicate, check suppression/sent Gmail and include sender identity, authorized mailing address (NOT stored in public GitHub), reply-to unsubscribe, business website. No bulk scraping, auto-blast, or unqualified leads.",
@@ -59,8 +57,15 @@
   "stripe_link_custom_intake_fields": 0,
   "stripe_initial_sessions_found": 0,
   "public_payment_promotion_allowed": false,
-  "public_payment_promotion_hold": "Existing link has no five-purchase cap and automatic-tax verification incomplete; no signed webhook. Keep pay link private to accepted scoped customers only; do not publish on website or cold outreach.",
+  "public_payment_promotion_hold": "Do not publicly advertise checkout until reliable payment/customer intake monitoring and automatic tax review are completed; owner explicitly declined any purchase-count limit. No changes to the existing Stripe payment link without a new business need and permission.",
   "stripe_tax_registrations_visible_count": 0,
   "stripe_tax_registrations_checked_on": "2026-10-24",
-  "stripe_tax_note": "Stripe API returned no tax registrations for this account. Does not prove owner's legal tax registration status; do not alter settings or assure checkout tax calculation until confirmed."
+  "stripe_tax_note": "Stripe API returned no tax registrations for this account. Does not prove owner's legal tax registration status; do not alter settings or assure checkout tax calculation until confirmed.",
+  "stripe_no_checkout_limit_owner_decision": true,
+  "stripe_no_checkout_limit_recorded_at": "2026-10-24",
+  "acquisition_priority": "Evidence-based outbound validation and organic inbound content; do not spend time on Stripe setup in routine hourly cycles",
+  "acquisition_last_verified_leads": 2,
+  "acquisition_last_drafts": 2,
+  "acquisition_last_sent_count": 0,
+  "acquisition_sending_status": "Gmail send tool was blocked by tool safety on first personalized email; draft creation succeeded. Count zero sent. Do not circumvent tool safety checks."
 }
