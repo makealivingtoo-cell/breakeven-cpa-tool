@@ -91,3 +91,10 @@ Actual cash spending C$0, revenue collected C$0. E001 has **0 confirmed outbound
 
 ### Next actions
 Grow qualified public-source prospect pool, publish a helpful organic contractor checklist on our own service site, and collect legitimate inbound requests. Re-evaluate legally and operationally permitted acquisition delivery without retrying tool-blocked send operations. Monitor business email and verified paid Stripe sessions, keeping the existing no-cap link unchanged.
+
+## 2026-10-24 late evening — Target market changed to Toronto/GTA
+Owner expressly excluded Saskatchewan businesses as sales targets and chose Toronto/GTA Ontario. Updated CONTROL.json, site homepage, and the contractor checklist to Toronto/GTA. Excluded LRS-SK-001/002 in PROSPECTS.csv; both prior SK Gmail drafts were moved to Trash with API confirmation. No messages had been sent to those leads.
+
+Research on Toronto home-service companies found two business contacts with public-page contact-path ambiguities, tracked as LRS-GTA-001 Urban Plumbing and LRS-GTA-002 Plumbing Toronto; two individually written Gmail drafts were saved and recorded as UNSENT, not leads contacted or qualified replies. Underlying visitor friction is a hypothesis, not verified missed business. No consumer or customer data was accessed.
+
+A manual redeploy of the authorized Render static site was triggered, ID dep-dbend5navr4c73bg0rb0, and initial status was build_in_progress; confirm before reporting the new site version live. Hourly automation updated to target only Toronto/GTA and respect owner's no-purchase-limit decision. Financial ledger remains unchanged: C$0 realized revenue, C$0 spent, zero actual commercial messages sent. Next: verify deploy; individually qualify GTA opportunities and follow CASL gates, then monitor genuine incoming requests.
