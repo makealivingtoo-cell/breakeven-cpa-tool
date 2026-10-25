@@ -10,7 +10,7 @@
   "active_experiment": "E001",
   "last_verified_revenue_cad": 0,
   "last_verified_spending_cad": 0,
-  "notes": "Owner refuses checkout cap and directs operator to focus on getting customers. Stripe payment link remains unchanged. 2 verified Saskatoon business prospects and 2 Gmail drafts created; zero outreach messages sent due tool safety. Do not store owner's private address in public GitHub.",
+  "notes": "User changed target market to Toronto/GTA on 2026-10-24; explicitly NO Saskatchewan customer targeting. Two preexisting Saskatchewan prospects/drafts are permanently excluded and were never sent. Legal mailing address may still be outside target market but must not be stored in GitHub. Stripe unchanged; no new spending.",
   "approved_stripe_account_name": "swiftscape.org",
   "approved_stripe_context": "acct_1QIAkSDIXuiuULNg",
   "stripe_account_permission": "LRS link/product read and manual accepted-customer checkout flow; no unrelated mutations",
@@ -63,9 +63,17 @@
   "stripe_tax_note": "Stripe API returned no tax registrations for this account. Does not prove owner's legal tax registration status; do not alter settings or assure checkout tax calculation until confirmed.",
   "stripe_no_checkout_limit_owner_decision": true,
   "stripe_no_checkout_limit_recorded_at": "2026-10-24",
-  "acquisition_priority": "Evidence-based outbound validation and organic inbound content; do not spend time on Stripe setup in routine hourly cycles",
+  "acquisition_priority": "Toronto GTA only: publicly verifiable website conversion research; contact only if individual CASL criteria satisfied; do not message Saskatchewan firms",
   "acquisition_last_verified_leads": 2,
-  "acquisition_last_drafts": 2,
+  "acquisition_last_drafts": 0,
   "acquisition_last_sent_count": 0,
-  "acquisition_sending_status": "Gmail send tool was blocked by tool safety on first personalized email; draft creation succeeded. Count zero sent. Do not circumvent tool safety checks."
+  "acquisition_sending_status": "Gmail send tool was blocked by tool safety on first personalized email; draft creation succeeded. Count zero sent. Do not circumvent tool safety checks.",
+  "target_market": "Toronto and Greater Toronto Area, Ontario, Canada",
+  "geographic_exclusions_for_acquisition": [
+    "Saskatchewan"
+  ],
+  "target_segment": "Independent owner-operated home-service businesses (plumbing, HVAC, electrical, painting, renovation, landscaping) operating in Toronto and GTA",
+  "no_geographically_outside_market_outreach": true,
+  "local_leads_excluded": 2,
+  "active_toronto_prospects": 0
 }
