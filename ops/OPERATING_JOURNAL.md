@@ -1,0 +1,158 @@
+# Operating Journal
+
+## 2026-10-24 — Launch decision
+### What we tried and why
+Evaluated low-cost models that could reach first revenue without inventory, paid ads, or recurring infrastructure. Chose a productized lead-recovery audit for home-service businesses because it can be fulfilled from public information plus customer-provided context, has near-zero marginal tooling cost, and can be demonstrated before scaling.
+
+### Evidence
+Current industry material consistently emphasizes missed/slowly handled inquiries, follow-up, and local visibility as material home-service growth problems. Treat benchmark percentages as directional only; customer-specific claims require customer data.
+
+### Cost
+C$0 spent. C$0 committed.
+
+### What happened
+- Created isolated Git branch `lead-recovery-audit`.
+- Built landing-page copy and interactive scenario calculator.
+- Defined C$99 pilot offer and 48-hour fulfillment promise.
+- Stripe capability connected, but live account selection still requires explicit human selection.
+- Render workspace visible but deployment actions require explicit workspace confirmation.
+
+### What evidence supports
+Start with direct validation before buying a domain, ads, or software. The first meaningful signal is qualified replies or paid purchase attempts.
+
+### Next change
+Complete delivery template + intake + payment link + deploy. Then run a small compliant outreach batch to owner-operated home-service firms with obvious public funnel gaps.
+
+
+## 2026-10-24 — Unattended operation scheduled
+### Action
+Created hourly `Lead Recovery Operator` scheduled task (24/7 hourly, no open chat required) and retained daily reporting. Added `ops/CONTROL.json` and an autonomy runbook for spending control, duplicate prevention, pause/resume, and account authorization boundaries.
+
+### Observed result
+Scheduling succeeded; first hourly unattended run has not yet been verified. No claim of continuous in-process execution or live customer acquisition.
+
+### Cost
+C$0 new outlay; C$0 collected.
+
+### Next action
+Run the first unattended cycle; verify its journal write. Continue independent research and asset refinement while specific sender, Stripe, and Render account selection remain unconfirmed.
+
+## 2026-10-24 — Stripe account permission confirmed
+### Action
+Verified via the connected Stripe account-list API that the accessible live account is `swiftscape.org` (context `acct_1QIAkSDIXuiuULNg`). User authorized use of this account for API access while explicitly preserving existing things. Updated `ops/CONTROL.json` for read-only API access and retained the no-live-payment-writes gate.
+
+### Result and constraints
+Account API connection verified; no existing Stripe resources edited and no Stripe mutations performed. No API secret accessed or exported. Product creation and live checkout remain disabled until separately authorized. Render and email permissions remain unset.
+
+### Cost and next action
+C$0 spent or committed; C$0 revenue collected. Continue unblocked research and landing-page refinement. Deploy and outreach only after specific resource/account permission is confirmed.
+
+## 2026-10-24 — Render deployment and business Gmail selected
+### Authorized scope
+The owner authorized one new free Render deployment in existing `My Workspace` and selected `makealivingtoo@gmail.com` as the business sender. Gmail OAuth profile confirmed as `makealivingtoo@gmail.com`. Unsolicited sales messages remain disabled until lawful sender-identification/opt-out details are documented. Customer-initiated inquiries may be replied to by the selected business account.
+
+### Completed
+- Created self-contained static site `lead-recovery-site/index.html` on the business GitHub branch, with calculator and `mailto` inquiry.
+- Created new Render static-site service `lead-recovery-snapshot`, ID `srv-dbejq5ks728c73cfj1gg`, in workspace `tea-d709v18gjchc73d34qs0`.
+- Service uses build command `test -f lead-recovery-site/index.html` and publish path `lead-recovery-site`; dependency installation bypass and automatic deployment disabled to minimize shared pipeline usage.
+- Render deploy `dep-dbejq5ks728c73cfj1sg` returned status `live`; service URL is https://lead-recovery-snapshot.onrender.com.
+- No existing Render service was edited. External HTTP fetch could not verify due to network/DNS restrictions in the execution environment; Render deployment API is the verified evidence.
+
+### Financials and risks
+- New paid commitments: C$0; total verified revenue C$0.
+- Render documentation says free static sites share workspace bandwidth and pipeline-minute allowances, with potential overage billing if a payment method is present. There is no per-site hard bandwidth-spend cap exposed by the connected tools. Keep manual deployments, monitor utilization, and raise an alert if usage rises unexpectedly.
+
+### Next action
+Verify public visitor accessibility through an available browser; set up compliant cold outreach only after required legal identification/unsubscribe details are available. Validate qualified demand and prepare checkout flow while honoring read-only Stripe restriction.
+
+## 2026-10-24 — Payment link verified
+Stripe read-only query matched the owner-provided live payment link to the C$99 one-time Lead Recovery Snapshot price. No completed checkout sessions were found. The link is active but currently has no five-purchase limit and has automatic tax enabled. Added PAYMENT_MONITORING.md and updated CONTROL.json; hourly monitoring instructions updated. No spending or revenue reported. Public website payment promotion remains held pending capacity/tax/fulfillment validation.
+
+## 2026-10-24 evening / 2026-10-25 UTC — Owner chooses no Stripe purchase cap; first outbound preparation
+### Owner decision
+The owner explicitly chose **no purchase limit** on the Stripe payment link and directed focus to getting customers. We verified the live LRS link still has `restrictions=null`; no Stripe objects were changed, and no further Stripe configuration is required as a routine task.
+
+### Market research
+- Researched Saskatoon-area independent home-service contractors using current public business webpages. First two prospects recorded in `ops/PROSPECTS.csv` with exact observations and email publication evidence.
+- Anytime Electric: its public Contact Us page visibly includes `(info@mysite.com)` alongside its published company email. This is a plausible visitor-confusion issue; **not evidence of missed leads**. Evidence: https://www.anytimeelectric.ca/contact-us
+- J Barry Electrical: the public homepage explains four-step call-to-quote workflow and publishes the owner's business email. Suggested clarifying next-response expectations as a copy experiment, not an asserted performance issue. Evidence: https://jbarryelectrical.ca/
+- Regulatory consent policy checked against Innovation Science and Economic Development Canada and CRTC. A public business email may supply narrowly applicable implied consent **only where** it is conspicuously published with no anti-solicitation statement and an offer is relevant to the business role. Sources: https://ised-isde.canada.ca/site/canada-anti-spam-legislation/en/getting-consent-send-email and https://web.crtc.gc.ca/eng/com500/guide.htm
+- No previous sent messages found for the two businesses in the authorized mailbox and no entries in our business suppression list.
+
+### Outreach execution
+- Gmail send request for Anytime Electric was blocked by the connector/tool's safety checks; **no email was sent**. Do not claim a customer contact or defeat these checks by routing through another send action.
+- Draft for Anytime Electric created in the authorized Gmail account, draft ID `r-3409618832371089716`.
+- Draft for J Barry Electrical created, draft ID `r-292009120373164387`.
+- Both prospects marked `draft_created_not_sent` with no sent-message IDs, no response, and no sale.
+- Owner's approved private mailing address appears only in private Gmail drafts as a CASL footer; it is **not stored in public GitHub**.
+
+### Money and experiment evidence
+Actual cash spending C$0, revenue collected C$0. E001 has **0 confirmed outbound messages, 0 replies, 0 paid orders**. Drafts and incomplete checkout sessions are not conversions.
+
+### Next actions
+Grow qualified public-source prospect pool, publish a helpful organic contractor checklist on our own service site, and collect legitimate inbound requests. Re-evaluate legally and operationally permitted acquisition delivery without retrying tool-blocked send operations. Monitor business email and verified paid Stripe sessions, keeping the existing no-cap link unchanged.
+
+## 2026-10-24 late evening — Target market changed to Toronto/GTA
+Owner expressly excluded Saskatchewan businesses as sales targets and chose Toronto/GTA Ontario. Updated CONTROL.json, site homepage, and the contractor checklist to Toronto/GTA. Excluded LRS-SK-001/002 in PROSPECTS.csv; both prior SK Gmail drafts were moved to Trash with API confirmation. No messages had been sent to those leads.
+
+Research on Toronto home-service companies found two business contacts with public-page contact-path ambiguities, tracked as LRS-GTA-001 Urban Plumbing and LRS-GTA-002 Plumbing Toronto; two individually written Gmail drafts were saved and recorded as UNSENT, not leads contacted or qualified replies. Underlying visitor friction is a hypothesis, not verified missed business. No consumer or customer data was accessed.
+
+A manual redeploy of the authorized Render static site was triggered, ID dep-dbend5navr4c73bg0rb0, and initial status was build_in_progress; confirm before reporting the new site version live. Hourly automation updated to target only Toronto/GTA and respect owner's no-purchase-limit decision. Financial ledger remains unchanged: C$0 realized revenue, C$0 spent, zero actual commercial messages sent. Next: verify deploy; individually qualify GTA opportunities and follow CASL gates, then monitor genuine incoming requests.
+
+## 2026-10-25 — Draft-free acquisition pivot and sitemap repair
+### Owner direction and controls
+Owner agreed we should prioritize actually executable acquisition over stockpiling unsent drafts. Kept Toronto/GTA-only targeting, no capital outlay, existing Stripe payment-link settings unchanged. Read CONTROL.json first and observed status active.
+
+### Actual checks
+- Render deploy dep-dbend5navr4c73bg0rb0 from prior release verified live. New sitemap-repair deploy dep-dbepvc0ae00c73dv5va0 verified live by Render API. Public HTTP requests from web and local execution environment still could not independently verify pages; local environment DNS is restricted.
+- Authorized Gmail inquiry search found only an automated GitHub PR notification, no customer inquiry.
+- Stripe checkout sessions filtered by LRS link show one `open/unpaid` session, which owner identified as their own checkout test. Not revenue or customer demand.
+- Read current prospect and order records: two Toronto prospects with unsent drafts and no sales; no actual outreach successes.
+- Free web research checked technical search-engine discovery approaches. Search didn't establish that the newly created website is indexed. Bing advises sitemap/IndexNow; submitting or indexing not proven (Bing docs: https://www.bing.com/webmasters/help/URL-Submission-62f2860b).
+
+### Work completed
+- Created `lead-recovery-site/sitemap.xml` listing the homepage and free Toronto/GTA contractor checklist, fixing the missing sitemap referenced by existing robots.txt.
+- Manually deployed **only** approved new static Render service to publish sitemap, deployment completed live without creating a paid service or altering unrelated services.
+- Updated `ops/EXPERIMENTS.csv`: E001 outbound cold-email experiment is `blocked_channel` because Gmail send operation was blocked; still zero delivered emails. Added E002 inbound experiment measuring **at least one qualified customer-initiated audit inquiry** attributable to site/checklist by Nov 15, zero spend. No traffic or ranking invented.
+- Updated `ops/CONTROL.json` to make E002 the active experiment and prevent repeated creation of unsent drafts.
+- Updated and re-enabled hourly Lead Recovery Operator schedule to prioritize executed acquisition and paid customer signals, not proxy activity.
+
+### Money and real outcomes
+No customer orders, no collected revenue, no verified cost incurred; finance ledger unchanged at C$0 received and C$0 spent. Any Render shared-quota billing risk remains subject to future verification. Source or draft work is not sales.
+
+### Remaining main blocker
+Organic discovery is unproven; site not confirmed indexed. Cold email tool blocking remains a channel limitation. Continue seeking permitted actual distribution or customer-initiated leads; don't circumvent safety protections, create repetitive drafts, or assert traction without evidence.
+
+## 2026-10-25 afternoon — Manual scheduler reliability audit
+Owner flagged that scheduled tasks might not be running. This entry is from an **interactive manual audit**, NOT proof of a successful unattended hourly run.
+
+Scheduler inspection around 15:55 America/Regina found:
+- Hourly Lead Recovery Operator had a recorded run at 2026-10-25T19:36:13Z (13:36 Saskatchewan time) but was **disabled** when inspected, with last task update at 19:37Z. Exact reason for its disabling is not exposed by the scheduler.
+- Business Daily Report remained enabled; last recorded run 2026-10-25T01:27:52Z (October 24 at 19:27 Saskatchewan time).
+- Task notifications and email delivery flags were off for both; lack of user-visible alerts should not be treated as proof of no execution.
+- Existing operating journal showed no separate unattended-run entries for later hourly ticks; a scheduler timestamp alone does not establish business work.
+
+Corrective action: Re-enabled the hourly operator and replaced its long prompt with a shorter hourly checklist requiring an idempotent, timestamped GitHub journal heartbeat on EVERY successful run. Confirmed update returned is_enabled=true. This audit did not send emails, accept payments, change Stripe, or spend money. If a later scheduled hour produces no heartbeat, treat that as lack of verified end-to-end execution and investigate; no claim of 24/7 success until observed.
+
+
+## 2026-10-25 afternoon — Verified organic distribution via IndexNow
+### Operator objective
+Owner emphasized reaching real Toronto/GTA prospects, not saving unsent messages. Direct commercial email remained blocked by the connected Gmail tool's safety checks; no bypass attempted. A compliant alternative search-discovery action was undertaken using only the owned website and isolated GitHub business branch.
+
+### Actual completed operations and evidence
+- Reviewed active control, Toronto-only target and no-spend permissions.
+- Published IndexNow verification file on the owner-authorized Lead Recovery Snapshot Render static site (single isolated business branch). Live deployment `dep-dbf7q58ae00c73f36r50` returned `live`.
+- Created read-only GitHub Actions workflow `.github/workflows/lrs-indexnow.yml` restricted to this business branch, publishing to the official IndexNow endpoint. GitHub Actions run [40238652937](https://github.com/makealivingtoo-cell/breakeven-cpa-tool/actions/runs/40238652937) finished successfully. Job logs independently confirmed public verification file accessible and IndexNow API returned **HTTP 202** for the home page and **HTTP 202** for `/contractor-checklist.html`.
+- Repo is public; this short Actions job used standard public-repository GitHub Actions infrastructure. No paid resource was deliberately added, no unrelated Stripe, Gmail, Render services or GitHub main files edited.
+
+### What the evidence does and does not mean
+Two real search-engine URL notifications were received. This is executed organic distribution, **NOT** proof of indexing, impressions, website visitors, a prospect contacted, a reply, or a paid sale. Do not count it toward E001's qualified cold-outreach denominator. Search indexing is not guaranteed. E002 remains active: first qualified inbound inquiry is the success metric.
+
+### Financial and customer outcomes
+- Verified new customer contacts delivered: **0**.
+- Verified customer-initiated replies and orders: **0**.
+- Revenue collected C$0; spending recorded C$0. Actual shared infrastructure overages not independently audited, so do not promise no later charges.
+- No outreach email was sent in this cycle; no customer information stored in public GitHub.
+
+### Next action and blocker
+Monitor business inbox and Stripe paid sessions for real interest. Work toward a separate brand-controlled channel with distribution to Toronto-area contractors, subject to account permissions and platform rules. Gmail cold-email send remains unavailable; do not circumvent that protection with another sending route. IndexNow can be checked in Bing Webmaster Tools if an account is later connected; avoid repeated unchanged URL submissions.
