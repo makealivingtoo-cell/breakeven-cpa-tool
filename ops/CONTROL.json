@@ -59,5 +59,8 @@
   "stripe_link_custom_intake_fields": 0,
   "stripe_initial_sessions_found": 0,
   "public_payment_promotion_allowed": false,
-  "public_payment_promotion_hold": "Existing link has no five-purchase cap and automatic-tax verification incomplete; no signed webhook. Keep pay link private to accepted scoped customers only; do not publish on website or cold outreach."
+  "public_payment_promotion_hold": "Existing link has no five-purchase cap and automatic-tax verification incomplete; no signed webhook. Keep pay link private to accepted scoped customers only; do not publish on website or cold outreach.",
+  "stripe_tax_registrations_visible_count": 0,
+  "stripe_tax_registrations_checked_on": "2026-10-24",
+  "stripe_tax_note": "Stripe API returned no tax registrations for this account. Does not prove owner's legal tax registration status; do not alter settings or assure checkout tax calculation until confirmed."
 }
