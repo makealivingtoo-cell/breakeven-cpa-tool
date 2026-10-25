@@ -67,3 +67,27 @@ Verify public visitor accessibility through an available browser; set up complia
 
 ## 2026-10-24 — Payment link verified
 Stripe read-only query matched the owner-provided live payment link to the C$99 one-time Lead Recovery Snapshot price. No completed checkout sessions were found. The link is active but currently has no five-purchase limit and has automatic tax enabled. Added PAYMENT_MONITORING.md and updated CONTROL.json; hourly monitoring instructions updated. No spending or revenue reported. Public website payment promotion remains held pending capacity/tax/fulfillment validation.
+
+## 2026-10-24 evening / 2026-10-25 UTC — Owner chooses no Stripe purchase cap; first outbound preparation
+### Owner decision
+The owner explicitly chose **no purchase limit** on the Stripe payment link and directed focus to getting customers. We verified the live LRS link still has `restrictions=null`; no Stripe objects were changed, and no further Stripe configuration is required as a routine task.
+
+### Market research
+- Researched Saskatoon-area independent home-service contractors using current public business webpages. First two prospects recorded in `ops/PROSPECTS.csv` with exact observations and email publication evidence.
+- Anytime Electric: its public Contact Us page visibly includes `(info@mysite.com)` alongside its published company email. This is a plausible visitor-confusion issue; **not evidence of missed leads**. Evidence: https://www.anytimeelectric.ca/contact-us
+- J Barry Electrical: the public homepage explains four-step call-to-quote workflow and publishes the owner's business email. Suggested clarifying next-response expectations as a copy experiment, not an asserted performance issue. Evidence: https://jbarryelectrical.ca/
+- Regulatory consent policy checked against Innovation Science and Economic Development Canada and CRTC. A public business email may supply narrowly applicable implied consent **only where** it is conspicuously published with no anti-solicitation statement and an offer is relevant to the business role. Sources: https://ised-isde.canada.ca/site/canada-anti-spam-legislation/en/getting-consent-send-email and https://web.crtc.gc.ca/eng/com500/guide.htm
+- No previous sent messages found for the two businesses in the authorized mailbox and no entries in our business suppression list.
+
+### Outreach execution
+- Gmail send request for Anytime Electric was blocked by the connector/tool's safety checks; **no email was sent**. Do not claim a customer contact or defeat these checks by routing through another send action.
+- Draft for Anytime Electric created in the authorized Gmail account, draft ID `r-3409618832371089716`.
+- Draft for J Barry Electrical created, draft ID `r-292009120373164387`.
+- Both prospects marked `draft_created_not_sent` with no sent-message IDs, no response, and no sale.
+- Owner's approved private mailing address appears only in private Gmail drafts as a CASL footer; it is **not stored in public GitHub**.
+
+### Money and experiment evidence
+Actual cash spending C$0, revenue collected C$0. E001 has **0 confirmed outbound messages, 0 replies, 0 paid orders**. Drafts and incomplete checkout sessions are not conversions.
+
+### Next actions
+Grow qualified public-source prospect pool, publish a helpful organic contractor checklist on our own service site, and collect legitimate inbound requests. Re-evaluate legally and operationally permitted acquisition delivery without retrying tool-blocked send operations. Monitor business email and verified paid Stripe sessions, keeping the existing no-cap link unchanged.
