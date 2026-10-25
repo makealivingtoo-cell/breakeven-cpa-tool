@@ -133,3 +133,26 @@ Scheduler inspection around 15:55 America/Regina found:
 - Existing operating journal showed no separate unattended-run entries for later hourly ticks; a scheduler timestamp alone does not establish business work.
 
 Corrective action: Re-enabled the hourly operator and replaced its long prompt with a shorter hourly checklist requiring an idempotent, timestamped GitHub journal heartbeat on EVERY successful run. Confirmed update returned is_enabled=true. This audit did not send emails, accept payments, change Stripe, or spend money. If a later scheduled hour produces no heartbeat, treat that as lack of verified end-to-end execution and investigate; no claim of 24/7 success until observed.
+
+
+## 2026-10-25 afternoon — Verified organic distribution via IndexNow
+### Operator objective
+Owner emphasized reaching real Toronto/GTA prospects, not saving unsent messages. Direct commercial email remained blocked by the connected Gmail tool's safety checks; no bypass attempted. A compliant alternative search-discovery action was undertaken using only the owned website and isolated GitHub business branch.
+
+### Actual completed operations and evidence
+- Reviewed active control, Toronto-only target and no-spend permissions.
+- Published IndexNow verification file on the owner-authorized Lead Recovery Snapshot Render static site (single isolated business branch). Live deployment `dep-dbf7q58ae00c73f36r50` returned `live`.
+- Created read-only GitHub Actions workflow `.github/workflows/lrs-indexnow.yml` restricted to this business branch, publishing to the official IndexNow endpoint. GitHub Actions run [40238652937](https://github.com/makealivingtoo-cell/breakeven-cpa-tool/actions/runs/40238652937) finished successfully. Job logs independently confirmed public verification file accessible and IndexNow API returned **HTTP 202** for the home page and **HTTP 202** for `/contractor-checklist.html`.
+- Repo is public; this short Actions job used standard public-repository GitHub Actions infrastructure. No paid resource was deliberately added, no unrelated Stripe, Gmail, Render services or GitHub main files edited.
+
+### What the evidence does and does not mean
+Two real search-engine URL notifications were received. This is executed organic distribution, **NOT** proof of indexing, impressions, website visitors, a prospect contacted, a reply, or a paid sale. Do not count it toward E001's qualified cold-outreach denominator. Search indexing is not guaranteed. E002 remains active: first qualified inbound inquiry is the success metric.
+
+### Financial and customer outcomes
+- Verified new customer contacts delivered: **0**.
+- Verified customer-initiated replies and orders: **0**.
+- Revenue collected C$0; spending recorded C$0. Actual shared infrastructure overages not independently audited, so do not promise no later charges.
+- No outreach email was sent in this cycle; no customer information stored in public GitHub.
+
+### Next action and blocker
+Monitor business inbox and Stripe paid sessions for real interest. Work toward a separate brand-controlled channel with distribution to Toronto-area contractors, subject to account permissions and platform rules. Gmail cold-email send remains unavailable; do not circumvent that protection with another sending route. IndexNow can be checked in Bing Webmaster Tools if an account is later connected; avoid repeated unchanged URL submissions.
