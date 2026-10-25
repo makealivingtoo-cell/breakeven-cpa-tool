@@ -122,3 +122,14 @@ No customer orders, no collected revenue, no verified cost incurred; finance led
 
 ### Remaining main blocker
 Organic discovery is unproven; site not confirmed indexed. Cold email tool blocking remains a channel limitation. Continue seeking permitted actual distribution or customer-initiated leads; don't circumvent safety protections, create repetitive drafts, or assert traction without evidence.
+
+## 2026-10-25 afternoon — Manual scheduler reliability audit
+Owner flagged that scheduled tasks might not be running. This entry is from an **interactive manual audit**, NOT proof of a successful unattended hourly run.
+
+Scheduler inspection around 15:55 America/Regina found:
+- Hourly Lead Recovery Operator had a recorded run at 2026-10-25T19:36:13Z (13:36 Saskatchewan time) but was **disabled** when inspected, with last task update at 19:37Z. Exact reason for its disabling is not exposed by the scheduler.
+- Business Daily Report remained enabled; last recorded run 2026-10-25T01:27:52Z (October 24 at 19:27 Saskatchewan time).
+- Task notifications and email delivery flags were off for both; lack of user-visible alerts should not be treated as proof of no execution.
+- Existing operating journal showed no separate unattended-run entries for later hourly ticks; a scheduler timestamp alone does not establish business work.
+
+Corrective action: Re-enabled the hourly operator and replaced its long prompt with a shorter hourly checklist requiring an idempotent, timestamped GitHub journal heartbeat on EVERY successful run. Confirmed update returned is_enabled=true. This audit did not send emails, accept payments, change Stripe, or spend money. If a later scheduled hour produces no heartbeat, treat that as lack of verified end-to-end execution and investigate; no claim of 24/7 success until observed.
