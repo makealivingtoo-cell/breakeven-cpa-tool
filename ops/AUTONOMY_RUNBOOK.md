@@ -38,3 +38,11 @@ The owner explicitly selected the connected live Stripe account named `swiftscap
 - Gmail: owner selected `makealivingtoo@gmail.com` (connected link `link_6abea640378c8191a4539d979d7a71d9`) as the business mailbox; OAuth profile verified. You may read relevant inquiries and send narrow replies to customer-initiated inquiries, with deduplication; never alter unrelated personal messages.
 - Cold outreach remains disabled pending documented CASL compliance, including the business sender's lawful mailing address and working opt-out process. Never assume the connected account selection by itself is authorization to send unsolicited messages.
 - Stripe `swiftscape.org` remains read-only; site asks for email inquiries and does not charge visitors.
+
+
+## Superseding owner checkout authorization — 2026-10-24
+Later owner authorization supersedes the initial read-only Stripe restriction **only for new Lead Recovery Snapshot product, price, payment link and necessary related checkout safety/monitoring actions**. The owner created the LRS product and supplied its payment URL. Verified live IDs and workflow are in `ops/CONTROL.json` and `ops/PAYMENT_MONITORING.md`. Do not alter any unrelated Stripe resources or account settings.
+
+Before using this payment link: read `ops/PAYMENT_MONITORING.md`. The link is active, at C$99 one time, but **does not have a five-checkout limit**; automatic tax is enabled; signed webhook fulfillment is not configured. Keep the link off public website until those are resolved. For accepted email inquiries, independently verify capacity and complete intake before sharing payment link. Poll checkout sessions hourly, filter strictly by `payment_link`, deduplicate and record any verified paid session. If a paid session exists, prioritize customer follow-up and delivery. Never count a pending checkout as revenue.
+
+CASL cold-email permissions were expanded by owner, but outbound remains conditioned on **per-recipient** evidence, proper sender identification, business relevance, compliance footer and unsubscribe suppression. Do not store the owner's private mailing address in public GitHub. Sending is not a substitute for validation; no claim of prospect contact without Gmail message ID.
