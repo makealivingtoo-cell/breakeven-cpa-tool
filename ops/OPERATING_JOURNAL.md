@@ -98,3 +98,27 @@ Owner expressly excluded Saskatchewan businesses as sales targets and chose Toro
 Research on Toronto home-service companies found two business contacts with public-page contact-path ambiguities, tracked as LRS-GTA-001 Urban Plumbing and LRS-GTA-002 Plumbing Toronto; two individually written Gmail drafts were saved and recorded as UNSENT, not leads contacted or qualified replies. Underlying visitor friction is a hypothesis, not verified missed business. No consumer or customer data was accessed.
 
 A manual redeploy of the authorized Render static site was triggered, ID dep-dbend5navr4c73bg0rb0, and initial status was build_in_progress; confirm before reporting the new site version live. Hourly automation updated to target only Toronto/GTA and respect owner's no-purchase-limit decision. Financial ledger remains unchanged: C$0 realized revenue, C$0 spent, zero actual commercial messages sent. Next: verify deploy; individually qualify GTA opportunities and follow CASL gates, then monitor genuine incoming requests.
+
+## 2026-10-25 — Draft-free acquisition pivot and sitemap repair
+### Owner direction and controls
+Owner agreed we should prioritize actually executable acquisition over stockpiling unsent drafts. Kept Toronto/GTA-only targeting, no capital outlay, existing Stripe payment-link settings unchanged. Read CONTROL.json first and observed status active.
+
+### Actual checks
+- Render deploy dep-dbend5navr4c73bg0rb0 from prior release verified live. New sitemap-repair deploy dep-dbepvc0ae00c73dv5va0 verified live by Render API. Public HTTP requests from web and local execution environment still could not independently verify pages; local environment DNS is restricted.
+- Authorized Gmail inquiry search found only an automated GitHub PR notification, no customer inquiry.
+- Stripe checkout sessions filtered by LRS link show one `open/unpaid` session, which owner identified as their own checkout test. Not revenue or customer demand.
+- Read current prospect and order records: two Toronto prospects with unsent drafts and no sales; no actual outreach successes.
+- Free web research checked technical search-engine discovery approaches. Search didn't establish that the newly created website is indexed. Bing advises sitemap/IndexNow; submitting or indexing not proven (Bing docs: https://www.bing.com/webmasters/help/URL-Submission-62f2860b).
+
+### Work completed
+- Created `lead-recovery-site/sitemap.xml` listing the homepage and free Toronto/GTA contractor checklist, fixing the missing sitemap referenced by existing robots.txt.
+- Manually deployed **only** approved new static Render service to publish sitemap, deployment completed live without creating a paid service or altering unrelated services.
+- Updated `ops/EXPERIMENTS.csv`: E001 outbound cold-email experiment is `blocked_channel` because Gmail send operation was blocked; still zero delivered emails. Added E002 inbound experiment measuring **at least one qualified customer-initiated audit inquiry** attributable to site/checklist by Nov 15, zero spend. No traffic or ranking invented.
+- Updated `ops/CONTROL.json` to make E002 the active experiment and prevent repeated creation of unsent drafts.
+- Updated and re-enabled hourly Lead Recovery Operator schedule to prioritize executed acquisition and paid customer signals, not proxy activity.
+
+### Money and real outcomes
+No customer orders, no collected revenue, no verified cost incurred; finance ledger unchanged at C$0 received and C$0 spent. Any Render shared-quota billing risk remains subject to future verification. Source or draft work is not sales.
+
+### Remaining main blocker
+Organic discovery is unproven; site not confirmed indexed. Cold email tool blocking remains a channel limitation. Continue seeking permitted actual distribution or customer-initiated leads; don't circumvent safety protections, create repetitive drafts, or assert traction without evidence.
