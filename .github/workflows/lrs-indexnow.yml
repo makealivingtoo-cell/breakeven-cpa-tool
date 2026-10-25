@@ -1,0 +1,36 @@
+name: Lead Recovery Search Discovery
+on:
+  push:
+    branches:
+      - lead-recovery-audit
+    paths:
+      - 'lead-recovery-site/**'
+      - '.github/workflows/lrs-indexnow.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  notify-indexnow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Verify live key and ownership
+        env:
+          SITE: https://lead-recovery-snapshot.onrender.com
+          KEY: 8dfe7a9e26fe8ad765dc395ec34ac6b6
+        run: |
+          set -euo pipefail
+          actual="$(curl -fsSL --retry 1 --max-time 25 "$SITE/$KEY.txt")"
+          test "$actual" = "$KEY"
+          echo "IndexNow key confirmed on business site"
+      - name: Notify IndexNow of business pages
+        env:
+          SITE: https://lead-recovery-snapshot.onrender.com
+          KEY: 8dfe7a9e26fe8ad765dc395ec34ac6b6
+        run: |
+          set -euo pipefail
+          for path in / /contractor-checklist.html; do
+            code="$(curl -sS --retry 1 --max-time 25 -o /tmp/indexnow-result -w '%{http_code}' --get --data-urlencode "url=$SITE$path" --data-urlencode "key=$KEY" https://api.indexnow.org/indexnow)"
+            echo "IndexNow notification for $path: HTTP $code"
+            case "$code" in 200|202) ;; *) cat /tmp/indexnow-result; exit 1;; esac
+          done
