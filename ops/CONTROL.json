@@ -7,7 +7,7 @@
   "allow_outbound_messages": true,
   "allow_live_payments": true,
   "allow_production_deployment": true,
-  "active_experiment": "E001",
+  "active_experiment": "E002",
   "last_verified_revenue_cad": 0,
   "last_verified_spending_cad": 0,
   "notes": "User changed target market to Toronto/GTA on 2026-10-24; explicitly NO Saskatchewan customer targeting. Two preexisting Saskatchewan prospects/drafts are permanently excluded and were never sent. Legal mailing address may still be outside target market but must not be stored in GitHub. Stripe unchanged; no new spending.",
@@ -63,7 +63,7 @@
   "stripe_tax_note": "Stripe API returned no tax registrations for this account. Does not prove owner's legal tax registration status; do not alter settings or assure checkout tax calculation until confirmed.",
   "stripe_no_checkout_limit_owner_decision": true,
   "stripe_no_checkout_limit_recorded_at": "2026-10-24",
-  "acquisition_priority": "Toronto GTA only: publicly verifiable website conversion research; contact only if individual CASL criteria satisfied; do not message Saskatchewan firms",
+  "acquisition_priority": "Toronto/GTA: acquire actual paying customers via permitted and executable channels, starting with organic free contractor checklist. No more unsolicited Gmail drafts as metric; enforce CASL and do not bypass blocked send tool. Check verified inbound inquiries and sales.",
   "acquisition_last_verified_leads": 2,
   "acquisition_last_drafts": 0,
   "acquisition_last_sent_count": 0,
@@ -75,5 +75,7 @@
   "target_segment": "Independent owner-operated home-service businesses (plumbing, HVAC, electrical, painting, renovation, landscaping) operating in Toronto and GTA",
   "no_geographically_outside_market_outreach": true,
   "local_leads_excluded": 2,
-  "active_toronto_prospects": 0
+  "active_toronto_prospects": 0,
+  "acquisition_channel_notes": "Outbound experiment E001 blocked due email connector safety; zero sent. E002 Toronto contractor free checklist + search discovery; new sitemap fixes robots.txt reference, no visits or inquiries verified. Publishing content is not evidence of traffic.",
+  "last_acquisition_strategy_update": "2026-10-25"
 }
