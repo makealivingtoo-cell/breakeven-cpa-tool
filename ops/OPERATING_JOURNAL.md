@@ -64,3 +64,6 @@ The owner authorized one new free Render deployment in existing `My Workspace` a
 
 ### Next action
 Verify public visitor accessibility through an available browser; set up compliant cold outreach only after required legal identification/unsubscribe details are available. Validate qualified demand and prepare checkout flow while honoring read-only Stripe restriction.
+
+## 2026-10-24 — Payment link verified
+Stripe read-only query matched the owner-provided live payment link to the C$99 one-time Lead Recovery Snapshot price. No completed checkout sessions were found. The link is active but currently has no five-purchase limit and has automatic tax enabled. Added PAYMENT_MONITORING.md and updated CONTROL.json; hourly monitoring instructions updated. No spending or revenue reported. Public website payment promotion remains held pending capacity/tax/fulfillment validation.
